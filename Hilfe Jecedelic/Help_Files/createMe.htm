@@ -1,0 +1,56 @@
+<html>
+ <link rel="stylesheet" type="text/css" href="styles.css">
+ <head>
+  <title>Jecedelic Server
+  </title>
+ </head>
+ <body>
+<h1>createMe();</h1>
+
+<br><h2>Verwendung</h2>
+createMe("Callback", "Clientname", "Produktname");<br><br>
+
+<br><h2>Parameter</h2>
+Callback:<br>
+Die Funktion, in die der Server mit den Parametern antworten soll.<br><br>
+Clientname:<br>
+Der Clientname ist der Nickname des Clients der sich am Server anmelden möchte. Dieser Name wird über ein Input-Textfeld oder z.B. eine Clientname-Generator Funktion definiert.<br><br>
+Produktname:<br>
+Der einmalige Produktname der Anwendung. Er dient der sinnvollen Unterscheidung auf dem Server, da mehrere verschiedene  Anwendungen gleichzeitig mit dem Server kommunizieren können.<br>Beispiele: "Tobis Chat", "Panzerkommandant 4", etc.<br><br>
+
+<br><h2>Rückgaben in Callback-Funktion</h2>
+
+<ol>
+<li><b>"true"</b> oder <b>"false"</b><br> Gibt zurück, ob die Registrierung erfolgreich war.<br>&nbsp; </li>
+<li><b>clientID</b><br> Die eindeutige clientID des Clients, welche einmalig auf dem Server ist.<br>&nbsp; </li>
+<li><b>clientName</b><br>Der Name des Clients auf dem Server. </li>
+</ol>
+
+<br><h2>Beschreibung</h2>
+Erstellt den aktuellen Benutzer der Anwendung als Client auf dem Server. Obwohl die Verbindung zum Server schon vorher erfolgte, wird der Benutzer erst jetzt wirklich registriert. <br>Wenn die Anfrage erfolgreich war, d.h. der Clientname noch nicht vergeben wurde oder die maximale Anzahl an Clients nicht überschritten wurde, gibt der Server als ersten Parameter ein "true" (String) zurück, ausserdem noch 2 weitere Parameter.<br><br>Falls die Anfrage nicht erfolgreich war, wird kein weiterer Parameter übergeben. <br><br>
+
+<br><h2>Tipp:</h2>
+Sinnvoll ist es hier, die Callback Funktion nach dem ersten Parameter zu steuern, sprich anhand einer if-Abfrage nach dem "true" oder "false", wie auch im folgenden Beispiel.<br><br>
+
+<br><h2>Beispiel</h2>
+<table class="code"><tr><td class="codenumber">&nbsp;1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</td><td class="codetext">
+createMe("ausgabe", _root.clientname_textfeld.text, "Panzerkommandant 4");<br><br>
+function ausgabe(erfolg, clientID, clientName){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if(erfolg == "true"){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;trace("Erfolgreich auf dem Server eingeloggt mit dem clientNamen: "+clientName+" und der clientID: "+clientID+"!");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;trace("Login fehlgeschlagen!");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+</td></tr></table><br>
+
+<br><h2>Verfügbarkeit</h2>
+Verfügbar ab Jecedelic Server Version 1.0.
+
+<br>&nbsp;<br><h2>Siehe auch</h2>
+<a href="jecDisconnect.htm">jecDisconnect();</a>
+
+
+
+ </body>
+</html>

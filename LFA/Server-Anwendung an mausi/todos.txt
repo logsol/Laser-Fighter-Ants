@@ -1,0 +1,5 @@
+getUserList
+hier muss ich Callback und Channelname angeben, wobei es schwachsinnig ist den die user aus nem andern channel zu holen.
+vll sollte es ein additional Parameter sein, mit standardmässig dem eigenen channel.
+möglicherweise will man irgendwann irgendwo aus der lobby die User aus den Channels sehen können.
+

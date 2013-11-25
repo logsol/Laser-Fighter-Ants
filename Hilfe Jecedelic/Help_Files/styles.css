@@ -1,0 +1,42 @@
+body {
+	font-family: tahoma, arial, sans serif;
+	background-image: url("img/jecedelic_server_logo.png");
+	background-repeat: no-repeat;
+	background-position: top right;
+	padding: 5px, 5px, 5px, 5px;
+	margin-top: 50px;
+	font-size: 0.8em;
+}
+
+h1 {
+	font-size: 1.7em;
+	text-align: center;
+}
+
+h2 {
+	font-size: 1.1em;
+}
+
+.code {
+	margin-left: 10px;
+	font-family: courier new;
+	font-size: 10pt;
+	border: 0;
+}
+
+.codenumber {
+	text-align: right;
+	padding: 5;
+	background-color: #000066;
+	color: #ffffff;
+}
+
+.codetext{
+	padding: 5;
+	background-color: #D7D7D7;
+}
+
+a {
+	color: #005500;
+	font-weight: bold;
+}

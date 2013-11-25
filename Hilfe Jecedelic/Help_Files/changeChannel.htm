@@ -1,0 +1,57 @@
+<html>
+ <link rel="stylesheet" type="text/css" href="styles.css">
+ <head>
+  <title>Jecedelic Server
+  </title>
+ </head>
+ <body>
+<h1>changeChannel();</h1>
+
+<br><h2>Verwendung</h2>
+changeChannel(Callback, ChannelName, Passwort) <br><br>
+
+<br><h2>Parameter</h2>
+Callback:<br>
+Die Funktion, in die der Server mit den Parametern antworten soll.<br><br>
+Channelname:<br>
+Der Name des Channels in den gewechselt werden soll.<br><br>
+Passwort:<br>
+Für Passwortgeschützte Channels.<br><br>
+
+<br><h2>Rückgaben in Callback-Funktion</h2>
+
+<ol>
+<li><b>"true"</b> oder <b>"false"</b><br> Gibt zurück, ob der Channel erfolgreich gewechselt werden konnte.<br>&nbsp; </li>
+<li><b>Channelname</b><br>Wenn "true" zurückgegeben wird, sendet der Server noch den Channelnamen mit. <br>&nbsp; </li>
+</ol>
+
+<br><h2>Beschreibung</h2>
+Erstellt einen Channel auf dem Server. Wenn alles glatt läuft, d.h. der Channelname noch nicht vergeben wurde oder die maximale Anzahl an Channels nicht überschritten wurde, gibt der Server als ersten Parameter ein "true" (String) zurück. Falls die Anfrage nicht erfolgreich war, wird "false" (String) zurück gegeben. <br><br>
+Die Parameter Channelname, Modus und Passwort sind in ihrer Verwendung optional können zur weiteren bearbeitung der Anwendung dienen.<br><br>
+
+<br><h2>Anmerkung:</h2>
+Wenn der Channelnam.<br><br>
+
+<br><h2>Beispiel</h2>
+<table class="code"><tr><td class="codenumber">&nbsp;1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10</td><td class="codetext">
+createChannel("ausgabe", "Channelname", "Modus", "Passwort");<br><br>
+function ausgabe(erfolg, Channelname, Modus){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if(erfolg == "true"){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gotoAndStop(Modus);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_root.channelname.text = Channelname;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;trace("Channel konnte nicht angelegt werden!");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}<br>
+</td></tr></table><br>
+
+<br><h2>Verfügbarkeit</h2>
+Verfügbar ab Jecedelic Server Version 1.0.
+
+<br>&nbsp;<br><h2>Siehe auch</h2>
+<a href="jecDisconnect.htm">jecDisconnect();</a>
+
+
+
+ </body>
+</html>

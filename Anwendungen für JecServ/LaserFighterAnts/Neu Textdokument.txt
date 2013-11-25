@@ -1,0 +1,52 @@
+getUserList("userList", _root.channel);
+userList = function (XMLData) {
+	_root.ich.hits = 0;
+	gegnerZahl = 0;
+	XMLData_a = XMLData.split(",");
+	for (x=0; x<XMLData_a.length-1; x++) {
+		Ants = XMLData_a[x].split(";;");
+		if (Ants[0] != _root.ID) {
+			gegnerZahl++;
+			duplicateMovieClip("gegner", Ants[0], gegnerZahl);
+			_root[Ants[0]].namen.text = Ants[1];
+			_root[Ants[0]].hits = 0;
+		}
+		rankingList.push({UserID: Ants[0], Hits: _root[Ants[0]].hits});
+	}
+}
+
+onNewClient = function (ServerData) {
+	Ants = ServerData.split(",");
+	gegnerZahl++;
+	duplicateMovieClip("gegner", Ants[1], gegnerZahl);
+	_root[Ants[1]].namen.text = Ants[0];
+	_root[Ants[1]].hits = 0;
+	rankingList.push(rankingList.push({UserID: Ants[1], Hits: _root[Ants[1]].hits}););
+}
+
+onRemoveClient = function (XMLData) {
+	XMLData_a = XMLData.split(",");
+	removeMovieClip(XMLData_a[1]);
+	newRankingList = new Array();
+	for(x=0; x<rankingList.length-1; x++){
+		if(rankingList[x].UserID != XMLData_a[1]){
+			newRankingList.push(rankingList[x]);
+		}
+	}
+	rankingList = newRankingList;
+}
+
+sortRankingList = function (hisID, hisHits) {
+	newRankingList = new Array();
+	for(x=0; x<rankingList.length-1; x++){
+		if(rankingList[x].UserID != XMLData_a[1]){
+			newRankingList.push(rankingList[x]);
+		}else{
+			rankingList[x].Hits++;
+			newRankingList.push(rankingList[x]);
+		}
+	}
+	rankingList = newRankingList;
+	rankingList.sortOn("Hits", 18)
+	trace(rankingList);
+};

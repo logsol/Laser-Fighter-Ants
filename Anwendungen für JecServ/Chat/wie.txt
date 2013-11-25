@@ -1,0 +1,4 @@
+connect auf
+
+host: philosuff
+port: 6937

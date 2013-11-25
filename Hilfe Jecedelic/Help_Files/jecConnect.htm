@@ -1,0 +1,35 @@
+<html>
+ <link rel="stylesheet" type="text/css" href="styles.css">
+ <head>
+  <title>Jecedelic Server
+  </title>
+ </head>
+ <body>
+<h1>jecConnect();</h1>
+
+<br><h2>Verwendung</h2>
+jecConnect(Callback, Host, Port);<br><br>
+<br><h2>Parameter</h2>
+Callback:<br>
+Die Funktion die nach erfolgreichem/misslungenem Verbindungsaufbau aufgerufen werden soll.<br><br>
+Host:<br>
+Die IP oder der Hostname des zu Jecedelic Servers.<br><br>
+Port:<br>
+Die Portnummer auf die der Jecedelic Server listened (meistens 6937).<br><br>
+<br><h2>Rückgaben in Callback-Funktion</h2>
+<ol><li><b>true</b> oder <b>false</b><br>Verbindung aufgebaut oder misslungen</li></ol>
+<br><h2>Beschreibung</h2>
+Baut eine XMLSocket Verbindung zum Jecedelic Server auf, welcher unter angegebener IP oder Hostname erreichbar ist. Der angegebene Port ist der Netzwerk-Kanal, welcher zur Kommunikation mit dem Server dient. Der Jecedelic Server kommuniziert standardmäßig über den Port 6937. <br><br>
+<br><h2>Anmerkung:</h2>
+Sollte es nicht möglich sein, einen aktiven Server über den gewählten Port zu kontaktieren, vergewissern Sie sich, dass der gewählte Port auch vom Server gelistened wird und keine Firewall diese Kommunikation unterbindet.<br><br>
+<br><h2>Beispiel</h2>
+<table class="code"><tr><td class="codenumber">&nbsp;1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</td><td class="codetext">jecConnect("ausgabe", "192.168.123.123", "6937");<br><br>function ausgabe(daten){<br>&nbsp;&nbsp;&nbsp;&nbsp;if(daten == "true"){<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;trace("Verbindung erfolgreich hergestellt!");<br>&nbsp;&nbsp;&nbsp;&nbsp;} else {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;trace("Verbindung konnte nicht aufgebaut werden!");<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}</td></tr></table><br>
+<br><h2>Verfügbarkeit</h2>
+Verfügbar ab Jecedelic Server Version 1.0.
+<br>&nbsp;<br><h2>Siehe auch</h2>
+<a href="jecDisconnect.htm">jecDisconnect();</a>
+
+
+
+ </body>
+</html>
