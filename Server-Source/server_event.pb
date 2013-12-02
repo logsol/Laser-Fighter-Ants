@@ -7,7 +7,7 @@ Select NetworkServerEvent()
 ;- connect Server | Author: T.Schmalenberg | (c)rigthed by Jecedelic Software                                   |
 ; --------------------------------------------------------------------------------------------------------------|
  Case 1
- sendMSG("this", NetworkClientID(), "", "", "onAlert|Willkommen auf dem Jecedelic Server "+Version)
+ sendMSG("this", EventClient(), "", "", "onAlert|Willkommen auf dem Jecedelic Server "+Version)
  
 ; --------------------------------------------------------------------------------------------------------------|
 ;- Port Listener | Author: T.Schmalenberg | (c)rigthed by Jecedelic Software                                    |
@@ -17,7 +17,7 @@ Select NetworkServerEvent()
 ;- split XMLData | Author: T.Schmalenberg | (c)rigthed by Jecedelic Software                                    |
 ; --------------------------------------------------------------------------------------------------------------|
   Rest.s = Space(500)
-  ReceiveNetworkData(NetworkClientID(), @Rest, 500)
+  ReceiveNetworkData(EventClient(), @Rest, 500)
   Flags.l = CountString(Rest, "|")
   For s=0 To Flags
    Flag                  = FindString(Rest, "|", 0)-1
@@ -29,7 +29,7 @@ Select NetworkServerEvent()
 ;- CreateMe | Author: T.Schmalenberg | (c)rigthed by Jecedelic Software                                         |
 ; --------------------------------------------------------------------------------------------------------------|
   If XMLDaten(0)\Parameter = "Getserverinfo"
-   sendMSG("this", NetworkClientID(), "", "", XMLDaten(1)\Parameter+"|"+Version)
+   sendMSG("this", EventClient(), "", "", XMLDaten(1)\Parameter+"|"+Version)
   EndIf
   
 ; --------------------------------------------------------------------------------------------------------------|
@@ -51,7 +51,7 @@ Select NetworkServerEvent()
     For x=0 To maxClient-1
      If client(x)\in_use = "0"
       client(x)\in_use  = "1"
-      client(x)\id      = Str(NetworkClientID())
+      client(x)\id      = Str(EventClient())
       client(x)\name    = XMLDaten(2)\Parameter
       client(x)\product = XMLDaten(3)\Parameter
       If client(x)\name <> "ServerAdmin"
@@ -62,7 +62,7 @@ Select NetworkServerEvent()
      EndIf
     Next
    Else
-    sendMSG("this", NetworkClientID(), "", "", XMLDaten(1)\Parameter+"|false")
+    sendMSG("this", EventClient(), "", "", XMLDaten(1)\Parameter+"|false")
    EndIf
   EndIf
 
@@ -72,7 +72,7 @@ Select NetworkServerEvent()
   If XMLDaten(0)\Parameter = "Changemyname"
    client_counter = 0
    For x=0 To maxClient-1
-    If client(x)\id = Str(NetworkClientID())
+    If client(x)\id = Str(EventClient())
      product.s = client(x)\product
     EndIf
    Next x
@@ -88,16 +88,16 @@ Select NetworkServerEvent()
    If client_counter = 0
     For x=0 To maxClient-1
      If client(x)\in_use = "1"
-      If client(x)\id = Str(NetworkClientID())
+      If client(x)\id = Str(EventClient())
        save_name.s    = client(x)\name
        client(x)\name = XMLDaten(2)\Parameter
-       sendMSG("this", NetworkClientID(), "", "", XMLDaten(1)\Parameter+"|true,"+client(x)\name)
+       sendMSG("this", EventClient(), "", "", XMLDaten(1)\Parameter+"|true,"+client(x)\name)
        sendMSG("this", Val(client(0)\id), "", "", "alert|"+save_name+" changing name to "+client(x)\name+".")
       EndIf
      EndIf
     Next x
    Else
-    sendMSG("this", NetworkClientID(), "", "", XMLDaten(1)\Parameter+"|false")
+    sendMSG("this", EventClient(), "", "", XMLDaten(1)\Parameter+"|false")
    EndIf
   EndIf
   
@@ -109,7 +109,7 @@ Select NetworkServerEvent()
    save_channel.s = XMLDaten(2)\Parameter
    For x=0 To maxClient-1
     If client(x)\in_use = "1"
-     If client(x)\id = Str(NetworkClientID())
+     If client(x)\id = Str(EventClient())
       save_product.s = client(x)\product
       Break
      EndIf
@@ -124,7 +124,7 @@ Select NetworkServerEvent()
      EndIf
     EndIf
    Next x
-   sendMSG("this", NetworkClientID(), "", "", XMLDaten(1)\Parameter + "|" + CList)
+   sendMSG("this", EventClient(), "", "", XMLDaten(1)\Parameter + "|" + CList)
   EndIf
 
 ; --------------------------------------------------------------------------------------------------------------|
@@ -134,7 +134,7 @@ Select NetworkServerEvent()
    CInfo.s = ""
    For x=0 To maxClient-1
     If client(x)\in_use = "1"
-     If client(x)\id = Str(NetworkClientID())
+     If client(x)\id = Str(EventClient())
       save_id.s      = client(x)\id
       save_product.s = client(x)\product 
       Break
@@ -154,7 +154,7 @@ Select NetworkServerEvent()
        CInfo.s = CInfo + client(x)\attribut_3
        CInfo.s = CInfo + client(x)\attribut_4
        CInfo.s = CInfo + client(x)\attribut_5
-       sendMSG("this", NetworkClientID(), "", "", XMLDaten(1)\Parameter + "|" + CInfo)
+       sendMSG("this", EventClient(), "", "", XMLDaten(1)\Parameter + "|" + CInfo)
       EndIf
      EndIf
     EndIf
@@ -182,12 +182,12 @@ Select NetworkServerEvent()
       channel(c)\pass   = XMLDaten(4)\Parameter
       save_channel.s    = channel(c)\name
       channel_num       = c
-      sendMSG("this", NetworkClientID(), "", "", XMLDaten(1)\Parameter+"|true,"+channel(c)\name+","+channel(c)\modi)
+      sendMSG("this", EventClient(), "", "", XMLDaten(1)\Parameter+"|true,"+channel(c)\name+","+channel(c)\modi)
       Break
      EndIf
     Next c
     For x=0 To maxClient-1
-     If client(x)\id = Str(NetworkClientID())
+     If client(x)\id = Str(EventClient())
        client(x)\channel = save_channel
        save_product.s    = client(x)\product
        sendMSG("this", Val(client(0)\id), "", "", "|"+client(x)\name+" has create and logged the Channel "+save_channel+".")
@@ -195,9 +195,9 @@ Select NetworkServerEvent()
      EndIf
     Next x
     channel(channel_num)\product   = save_product
-    sendMSG("all", NetworkClientID(), save_product, "", "updateChannel|")
+    sendMSG("all", EventClient(), save_product, "", "updateChannel|")
    Else
-    sendMSG("this", NetworkClientID(), "", "", XMLDaten(1)\Parameter+"|false")
+    sendMSG("this", EventClient(), "", "", XMLDaten(1)\Parameter+"|false")
    EndIf
   EndIf
 
@@ -208,7 +208,7 @@ Select NetworkServerEvent()
    change.s = "false"
    For x=0 To maxClient-1
     If client(x)\in_use = "1"
-     If client(x)\id = Str(NetworkClientID())
+     If client(x)\id = Str(EventClient())
       If client(x)\channel <> XMLDaten(2)\Parameter
        save_id.s      = client(x)\id
        save_name.s    = client(x)\name
@@ -223,9 +223,9 @@ Select NetworkServerEvent()
        Next c
        If change = "true"
         client(x)\channel = XMLDaten(2)\Parameter
-        sendMSG("eatchother", NetworkClientID(), save_product, client(x)\channel, "createClient|"+save_name+","+save_id)
+        sendMSG("eatchother", EventClient(), save_product, client(x)\channel, "createClient|"+save_name+","+save_id)
         checkchannel(save_product, save_channel)
-        sendMSG("all", NetworkClientID(), save_product, "", "updateChannel|")
+        sendMSG("all", EventClient(), save_product, "", "updateChannel|")
        EndIf
        Break
       EndIf
@@ -233,13 +233,13 @@ Select NetworkServerEvent()
     EndIf
    Next x
    If change = "true"
-    sendMSG("all", NetworkClientID(), save_product, save_channel, "removeClient|"+save_name+","+save_id)
+    sendMSG("all", EventClient(), save_product, save_channel, "removeClient|"+save_name+","+save_id)
     sendMSG("this", Val(client(0)\id), "", "", "alert|"+save_name+" change the Channel "+save_channel+".")
-    sendMSG("this", NetworkClientID(), "", "", XMLDaten(1)\Parameter+"|true,"+XMLDaten(2)\Parameter)
+    sendMSG("this", EventClient(), "", "", XMLDaten(1)\Parameter+"|true,"+XMLDaten(2)\Parameter)
     sendMSG("this", Val(client(0)\id), "", "", "alert|"+save_name+" log into the Channel "+XMLDaten(2)\Parameter+".")
     checkchannel(save_product, save_channel)
    Else
-    sendMSG("this", NetworkClientID(), "", "", XMLDaten(1)\Parameter+"|false")
+    sendMSG("this", EventClient(), "", "", XMLDaten(1)\Parameter+"|false")
    EndIf
   EndIf
 
@@ -251,7 +251,7 @@ Select NetworkServerEvent()
   client_counter = 0
    For x=0 To maxClient-1
     If client(x)\in_use = "1"
-     If client(x)\id = Str(NetworkClientID())
+     If client(x)\id = Str(EventClient())
       save_product = client(x)\product
       Break
      EndIf
@@ -274,7 +274,7 @@ Select NetworkServerEvent()
      EndIf
     EndIf
    Next c
-   sendMSG("this", NetworkClientID(), "", "", XMLDaten(1)\Parameter+"|"+CList)
+   sendMSG("this", EventClient(), "", "", XMLDaten(1)\Parameter+"|"+CList)
   EndIf
     
 ; --------------------------------------------------------------------------------------------------------------|
@@ -283,7 +283,7 @@ Select NetworkServerEvent()
   If XMLDaten(0)\Parameter = "Sendstring"
    For x=0 To maxClient-1
     If client(x)\in_use = "1"
-     If client(x)\id = Str(NetworkClientID())
+     If client(x)\id = Str(EventClient())
       save_id.s      = client(x)\id
       save_name.s    = client(x)\name
       save_product.s = client(x)\product
@@ -300,7 +300,7 @@ Select NetworkServerEvent()
 ;- remove Client | Author: T.Schmalenberg | (c)rigthed by Jecedelic Software                                    |
 ; --------------------------------------------------------------------------------------------------------------|
  For x=0 To maxClient-1 
-  If client(x)\id = Str(NetworkClientID())
+  If client(x)\id = Str(EventClient())
    save_id.s      = client(x)\id
    save_name.s    = client(x)\name
    save_channel.s = client(x)\channel
@@ -315,12 +315,13 @@ Select NetworkServerEvent()
    client(x)\attribut_3 = ""
    client(x)\attribut_4 = ""
    client(x)\attribut_5 = ""
-   sendMSG("all", NetworkClientID(), save_product, save_channel, "removeClient|"+save_name+","+save_id)
+   sendMSG("all", EventClient(), save_product, save_channel, "removeClient|"+save_name+","+save_id)
    sendMSG("this", Val(client(0)\id), "", "", "alert|"+save_name+" disconnect the Server.")
   EndIf
  Next x
  checkchannel(save_product, save_channel)
  ;S/N: wpd800 58636 09432 63997
 EndSelect
-; ExecutableFormat=Windows
-; EOF
+; IDE Options = PureBasic 5.11 (Windows - x64)
+; CursorPosition = 317
+; FirstLine = 269
