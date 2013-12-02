@@ -3,8 +3,8 @@
 ; --------------------------------------------------------------------------------------------------------------|
 Procedure.s Path() 
   Path$ = Space(1000) 
-  GetModuleFileName_(0,@Path$,1000) 
-  ProcedureReturn GetPathPart(Path$) 
+  ;GetModuleFileName_(0,@Path$,1000) 
+  ProcedureReturn "";GetPathPart(Path$) 
 EndProcedure 
 
 ; --------------------------------------------------------------------------------------------------------------|
@@ -129,6 +129,5 @@ Procedure checkchannel (save_product.s, save_channel.s)
  sendMSG("all", EventClient(), save_product, "", "updateChannel|")
 EndProcedure
 ; IDE Options = PureBasic 5.11 (Windows - x64)
-; CursorPosition = 128
-; FirstLine = 79
+; CursorPosition = 6
 ; Folding = -

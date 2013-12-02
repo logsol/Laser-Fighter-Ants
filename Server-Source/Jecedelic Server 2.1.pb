@@ -16,10 +16,11 @@ createNetwork(Network_Port)
 Repeat
  IncludeFile "window_event.pb"
  IncludeFile "server_event.pb"
+ Delay(1)
 ForEver
 ; ExecutableFormat=Windows
 ; EnableNT4
 ; IDE Options = PureBasic 5.11 (Windows - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 20
+; CursorPosition = 18
 ; Executable = G:\Projekte\Jecedelic Server\Server-Anwendung\Jecedelic Server 2.1 .exe
