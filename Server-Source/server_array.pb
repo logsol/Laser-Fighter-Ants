@@ -13,7 +13,7 @@ Structure Client
  attribut_4.s
  attribut_5.s
 EndStructure
-Dim client.Client(maxClient)
+Global Dim client.Client(maxClient)
 
 ;- Array DB generieren
 For x=0 To maxClient - 1
@@ -30,7 +30,7 @@ Structure Channel
  modi.s
  pass.s
 EndStructure
-Dim channel.Channel(maxChannel)
+Global Dim channel.Channel(maxChannel)
 
 ;- Array DB generieren
 For c=0 To maxChannel - 1
@@ -43,11 +43,11 @@ Next c
 Structure Server
  Parameter.s
 EndStructure
-Dim XMLDaten.Server(maxXMLDaten)
+Global Dim XMLDaten.Server(maxXMLDaten)
 
 ;- Array DB generieren
 For s=0 To maxXMLDaten- 1
  XMLDaten(s)\Parameter = ""
 Next s
-; ExecutableFormat=Windows
-; EOF
+; IDE Options = PureBasic 5.11 (Windows - x64)
+; CursorPosition = 45
