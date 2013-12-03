@@ -4,7 +4,7 @@
 Procedure.s Path() 
   Path$ = Space(1000) 
   ;GetModuleFileName_(0,@Path$,1000) 
-  ProcedureReturn "";GetPathPart(Path$) 
+  ProcedureReturn ""
 EndProcedure 
 
 ; --------------------------------------------------------------------------------------------------------------|
@@ -52,6 +52,7 @@ EndProcedure
 Procedure createNetwork (Network_Port.l)
  If InitNetwork() = 0: End: EndIf
  Socket.l = CreateNetworkServer(0, Network_Port) 
+ CreateNetworkServer(1,843)
  If Socket = 0: End : EndIf
 ;  #FD_ALL = #FD_READ|#FD_WRITE|#FD_OOB|#FD_ACCEPT|#FD_CONNECT|#FD_CLOSE
 ;  WSAAsyncSelect_(Socket, WindowID(), #WM_NULL, #FD_ALL)
@@ -87,7 +88,8 @@ Procedure sendMSG (Empfaenger.s, ClientID.l, Product.s, Channel.s, Msg.s)
   Next x
  EndIf
  If Empfaenger = "this"
-  SendNetworkData(ClientID, @Msg, Len(Msg)+1)
+   SendNetworkData(ClientID, @Msg, Len(Msg)+1)
+   PrintN("%>"+Msg)
  EndIf
  If Empfaenger = "global"
   For x=0 To 99
@@ -128,6 +130,7 @@ Procedure checkchannel (save_product.s, save_channel.s)
  EndIf
  sendMSG("all", EventClient(), save_product, "", "updateChannel|")
 EndProcedure
-; IDE Options = PureBasic 5.11 (Windows - x64)
-; CursorPosition = 6
+; IDE Options = PureBasic 5.11 (Linux - x86)
+; CursorPosition = 91
+; FirstLine = 75
 ; Folding = -
