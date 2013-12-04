@@ -20,7 +20,7 @@ Repeat
 ForEver
 ; ExecutableFormat=Windows
 ; EnableNT4
-; IDE Options = PureBasic 5.11 (Windows - x64)
+; IDE Options = PureBasic 5.11 (Linux - x86)
 ; ExecutableFormat = Console
 ; CursorPosition = 18
-; Executable = G:\Projekte\Jecedelic Server\Server-Anwendung\Jecedelic Server 2.1 .exe
+; Executable = G:/Projekte/Jecedelic Server/Server-Anwendung/Jecedelic Server 2.1 .exe

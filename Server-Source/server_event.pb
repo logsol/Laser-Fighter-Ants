@@ -7,7 +7,7 @@ Select NetworkServerEvent()
 ;- connect Server | Author: T.Schmalenberg | (c)rigthed by Jecedelic Software                                   |
 ; --------------------------------------------------------------------------------------------------------------|
  Case 1
- sendMSG("this", EventClient(), "", "", "onAlert|Willkommen auf dem Jecedelic Server "+Version)
+ ;sendMSG("this", EventClient(), "", "", "onAlert|Willkommen auf dem Jecedelic Server "+Version)
  
 ; --------------------------------------------------------------------------------------------------------------|
 ;- Port Listener | Author: T.Schmalenberg | (c)rigthed by Jecedelic Software                                    |
@@ -18,6 +18,8 @@ Select NetworkServerEvent()
 ; --------------------------------------------------------------------------------------------------------------|
   Rest.s = Space(500)
   ReceiveNetworkData(EventClient(), @Rest, 500)
+  _resivedData.s = Rest
+  
   Flags.l = CountString(Rest, "|")
   For s=0 To Flags
    Flag                  = FindString(Rest, "|", 0)-1
@@ -25,6 +27,10 @@ Select NetworkServerEvent()
    Rest.s                = Mid(Rest, Flag+2, Len(Rest)+1)
   Next
   
+  PrintN("%>"+_resivedData)
+  If FindString(_resivedData,"policy-file-request")
+    sendMSG("this", EventClient(), "", "", "<?xml version='1.0'?> <cross-domain-policy> <allow-access-from domain='jec-s-one.com' secure='false' to-ports='6937' /> </cross-domain-policy>")
+  EndIf
 ; --------------------------------------------------------------------------------------------------------------|
 ;- CreateMe | Author: T.Schmalenberg | (c)rigthed by Jecedelic Software                                         |
 ; --------------------------------------------------------------------------------------------------------------|
@@ -322,6 +328,6 @@ Select NetworkServerEvent()
  checkchannel(save_product, save_channel)
  ;S/N: wpd800 58636 09432 63997
 EndSelect
-; IDE Options = PureBasic 5.11 (Windows - x64)
-; CursorPosition = 317
-; FirstLine = 269
+; IDE Options = PureBasic 5.11 (Linux - x86)
+; CursorPosition = 31
+; FirstLine = 22
